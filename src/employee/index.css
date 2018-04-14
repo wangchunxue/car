@@ -1,0 +1,22 @@
+@import '~antd/dist/antd.css';
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.business-content{
+  padding: 24; 
+  background: '#fff';
+  min-height: '50vh';
+}
+.ant-btn-primary{
+  margin-right: 30px;
+}
+#components-layout-demo-side .logo {
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
+}
+.ant-layout-has-sider{
+  width: 100%;
+}
