@@ -44,8 +44,8 @@ class SiderDemo extends Component {
                 >
                     <div className="logo" />
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onClick={this.onClick}>
-                        <Menu.Item key="1">goods info</Menu.Item>
-                        <Menu.Item key="2">goods mangent</Menu.Item>
+                        <Menu.Item key="1"><Icon type="table" /><span>goods info</span></Menu.Item>
+                        <Menu.Item key="2"><Icon type="fork" /><span>goods mangent</span></Menu.Item>
                     </Menu>
                 </Sider>
                 <Layout>

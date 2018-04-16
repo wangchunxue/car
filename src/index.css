@@ -26,3 +26,6 @@ body {
   left: 50%;
   transform: translateX(-50%);
 }
+.login-fail{
+  color: red;
+}

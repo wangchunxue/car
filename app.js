@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var query = require('./conf/db'); // 使用连接池连接数据库
+var query = require('./models/db'); // 使用连接池连接数据库
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -37,20 +37,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-console.log(12);
-app.get('/', function(req, res) {
-  // 查询所有数据内容
-  query('SELECT * FROM t_business', [], function(error, results, fields) {
-    console.log(results);
-    if (error) {
-      console.log(error);
-    } else {
-      res.render('index', {
-        title: 'wangchuxnue',
-        moive: results
-      });
-    }
-  });
-});
-console.log(13);
 module.exports = app;

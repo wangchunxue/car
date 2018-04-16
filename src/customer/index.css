@@ -20,3 +20,16 @@ body {
 .ant-layout-has-sider{
   width: 100%;
 }
+.customer-table{
+  margin-top: 12px;
+  width: 100%;
+}
+.customer-save{
+  float: right;
+}
+.customer-exit{
+  float: right;
+}
+.ant-input{
+  width: 150px;
+}
