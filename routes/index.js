@@ -10,7 +10,6 @@ router.get('/www', function (req, res) {
     if (error) {
       console.log(error);
     } else {
-      console.log(results);
       res.json(results);
     }
   });

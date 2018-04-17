@@ -87,25 +87,25 @@ class SiderDemo extends Component {
     console.log(1);
     this.setState({ collapsed });
   }
-  onClick(item){
-    if(item.key == 10){
-      this.setState({ 
+  onClick(item) {
+    if (item.key == 10) {
+      this.setState({
         add: true,
         query: false,
         total: false,
-       });
-    } else if(item.key == 11){
-      this.setState({ 
+      });
+    } else if (item.key == 11) {
+      this.setState({
         add: false,
         query: true,
         total: false,
-       });
-    } else if(item.key == 13){
-      this.setState({ 
+      });
+    } else if (item.key == 13) {
+      this.setState({
         add: false,
         query: false,
         total: true,
-       });
+      });
     }
 
   }
@@ -129,7 +129,7 @@ class SiderDemo extends Component {
           <Content style={{ margin: '0 16px' }}>
             <div className="business-content" >
               {this.state.add ? <div><Add /></div> : false}
-              {this.state.query ? <div>query is a cat.</div> :false}
+              {this.state.query ? <div>query is a cat.</div> : false}
               {this.state.total ? <div>total is a cat.</div> : false}
             </div>
           </Content>

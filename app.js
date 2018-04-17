@@ -7,6 +7,7 @@ var query = require('./models/db'); // 使用连接池连接数据库
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var customerRouter = require('./routes/customer');
 
 var app = express();
 console.log(1);
@@ -21,6 +22,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/customer', customerRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

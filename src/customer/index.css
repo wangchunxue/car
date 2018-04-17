@@ -33,3 +33,17 @@ body {
 .ant-input{
   width: 150px;
 }
+.customer-save{
+  background-color: #1890ff;
+  border-color: #1890ff;
+  color: #ccc;
+}
+.query-customer-tell{
+  float: right
+}
+.fix-customer{
+  margin-top: 40px;
+}
+.query-result-customer{
+  margin-top: 40px;
+}
