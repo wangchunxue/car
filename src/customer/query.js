@@ -86,14 +86,7 @@ class Show extends Component {
             id: queryData[index].customerId
         };
         this.postData('http://localhost:3000/customer/delete', data).then(res => {
-            let { name, tell } = this.state;
-            const data = {
-                name: name,
-                iphone: tell
-            };
-            this.postData('http://localhost:3000/customer/query', data).then(res => {
-                this.setState({ queryData: res });
-            });
+            this.queryClick();
         });
     }
     postData(url, data) {
@@ -164,6 +157,16 @@ class Show extends Component {
         )
     }
     render() {
+        let currData = this.state.currData;
+        let gradevalue = '普通用户';
+        if(currData){
+            if(currData.grade == 1){
+                gradevalue = '普通用户';
+            } else {
+                gradevalue = 'VIP用户';
+            }
+        }
+        
         return (
             <div>
                 <h3>查询顾客</h3>
@@ -196,7 +199,7 @@ class Show extends Component {
                                                 showSearch
                                                 style={{ width: 200 }}
                                                 onChange={this.gradeChange}
-                                                defaultValue={this.state.currData.grade}
+                                                defaultValue={gradevalue}
                                                 placeholder="顾客等级"
                                                 optionFilterProp="children"
                                                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>

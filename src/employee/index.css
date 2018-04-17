@@ -20,3 +20,19 @@ body {
 .ant-layout-has-sider{
   width: 100%;
 }
+.ant-input{
+  width: 150px;
+}
+.psw-input{
+  margin: 0 180px;
+}
+.fix-worker{
+  margin-top: 50px;
+}
+.worker-table{
+  margin-top: 12px;
+  width: 100%;
+}
+.workers{
+  margin-top: 50px;
+}

@@ -4,6 +4,8 @@ import './index.css';
 import Main from '../main';
 import { Button, Layout, Menu, Breadcrumb, Icon, Alert } from 'antd';
 import { Router, Route, Link, hashHistory } from 'react-router';
+import User from "./user";
+import Worker from "./worker";
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
@@ -12,7 +14,8 @@ class SiderDemo extends Component {
         super(props);
         this.state = {
             collapsed: false,
-            add:true
+            worker: true,
+            user: false
         };
         this.onCollapse = this.onCollapse.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -20,8 +23,18 @@ class SiderDemo extends Component {
     onCollapse(collapsed) {
         this.setState({ collapsed });
     }
-    onClick(item){
-        console.log(1)
+    onClick(item) {
+        if (item.key == 7) {
+            this.setState({
+                worker: false,
+                user: true
+            });
+        } else if (item.key == 8) {
+            this.setState({
+                worker: true,
+                user: false
+            });
+        }
     }
     render() {
         return (
@@ -33,9 +46,13 @@ class SiderDemo extends Component {
                 >
                     <div className="logo" />
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onClick={this.onClick}>
+                        <Menu.Item key="8">
+                            <Icon type="user" />
+                            <span>worker</span>
+                        </Menu.Item>
                         <Menu.Item key="7">
                             <Icon type="user" />
-                            <span>employee</span>
+                            <span>user</span>
                         </Menu.Item>
                     </Menu>
                 </Sider>
@@ -43,7 +60,8 @@ class SiderDemo extends Component {
                     <Header style={{ background: '#fff', padding: 0, height: 0 }} />
                     <Content style={{ margin: '0 16px' }}>
                         <div className="business-content" >
-                            {this.state.add ? <div>add is a cat.</div> : false}
+                            {this.state.user ? <User/> : false}
+                            {this.state.worker ? <Worker/> : false}                            
                         </div>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
