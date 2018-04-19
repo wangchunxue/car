@@ -2,75 +2,16 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Main from '../main';
+import Chart from './chart';
+import Add from './add';
+import Query from './query';
 import { Button, Layout, Menu, Breadcrumb, Icon, Tabs, Input, DatePicker } from 'antd';
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 import { Router, Route, Link, hashHistory } from 'react-router';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const TabPane = Tabs.TabPane;
-const Add = props => {
-  function onchange(date, dateString) {
-    console.log(date, dateString);
-  }
-  return (
-    <div>
-      <form method="post">
-        <h3>业务流水</h3>
-        <span className="add-search">搜索流水<Input className="add-car-num add" value='' /></span>
-        <hr />
-        顾客姓名：<Input className="add-name" value='' />
-        电话：<Input className="add-iphone add" value='' />
-        车牌号码：<Input className="add-car-num add" value='' />
-        流水日期：<DatePicker />
-        流水单号：<Input className="add-car-num add" value='' />
-        <table data-toggle="table" className="goods-table">
-          <thead>
-            <tr>
-              <th>配件编码</th>
-              <th>配件名称</th>
-              <th>数量</th>
-              <th>单价</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>轮胎</td>
-              <td>1</td>
-              <td>560</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>轮胎</td>
-              <td>1</td>
-              <td>560</td>
-            </tr> <tr>
-              <td>1</td>
-              <td>轮胎</td>
-              <td>1</td>
-              <td>560</td>
-            </tr> <tr>
-              <td>1</td>
-              <td>轮胎</td>
-              <td>1</td>
-              <td>560</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>轮胎</td>
-              <td>1</td>
-              <td>560</td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-      <hr />
-      <span>总金额： 1120</span>
-      <span className="user">业务员:贝壳 </span>
-    </div>
 
-  )
-}
 class SiderDemo extends Component {
   constructor(props) {
     super(props);
@@ -128,9 +69,9 @@ class SiderDemo extends Component {
           <Header style={{ background: '#fff', padding: 0, height: 0 }} />
           <Content style={{ margin: '0 16px' }}>
             <div className="business-content" >
-              {this.state.add ? <div><Add /></div> : false}
-              {this.state.query ? <div>query is a cat.</div> : false}
-              {this.state.total ? <div>total is a cat.</div> : false}
+              {this.state.add ? <Add /> : false}
+              {this.state.query ? <Query />  : false}
+              {this.state.total ? <Chart/> : false}
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>

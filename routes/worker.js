@@ -9,8 +9,7 @@ router.post('/add', function (req, res) {
             if(err){
              console.log('[INSERT ERROR] - ',err.message);
              return;
-            } else {
-                console.log('INSERT ID:',result);        
+            } else {     
                 res.json(result);
             }     
     });
@@ -22,7 +21,6 @@ router.post('/query', function (req, res) {
       if (error) {
         console.log(error);
       } else {
-        console.log(results);
         res.json(results);
       }
     });
@@ -34,7 +32,6 @@ router.get('/all', function (req, res) {
       if (error) {
         console.log(error);
       } else {
-        console.log(results);
         res.json(results);
       }
     });
@@ -46,7 +43,6 @@ router.post('/delete', function (req, res) {
       if (error) {
         console.log(error);
       } else {
-        console.log(results);
         res.json(results);
       }
     });
@@ -59,8 +55,7 @@ router.post('/update', function (req, res) {
           if(err){
            console.log("update"+err.message);
            return;
-          } else {
-              console.log('update ID:',result);        
+          } else {    
               res.json(result);
           }     
   });

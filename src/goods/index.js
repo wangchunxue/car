@@ -4,6 +4,8 @@ import './index.css';
 import Main from '../main';
 import { Button, Layout, Menu, Breadcrumb, Icon, Alert } from 'antd';
 import { Router, Route, Link, hashHistory } from 'react-router';
+import GoodsInfo from "./goodsInfo";
+import Repertory from "./repertory";
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
@@ -45,15 +47,15 @@ class SiderDemo extends Component {
                     <div className="logo" />
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onClick={this.onClick}>
                         <Menu.Item key="1"><Icon type="table" /><span>goods info</span></Menu.Item>
-                        <Menu.Item key="2"><Icon type="fork" /><span>goods mangent</span></Menu.Item>
+                        <Menu.Item key="2"><Icon type="fork" /><span>repertory</span></Menu.Item>
                     </Menu>
                 </Sider>
                 <Layout>
                     <Header style={{ background: '#fff', padding: 0, height: 0 }} />
                     <Content style={{ margin: '0 16px' }}>
                     <div className="business-content" >
-                            {this.state.info ? <div>fix is a cat.</div> : false}
-                            {this.state.managent ? <div>delete is a cat.</div> : false}
+                            {this.state.info ? <GoodsInfo/> : false}
+                            {this.state.managent ? <Repertory/>: false}
                         </div>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>

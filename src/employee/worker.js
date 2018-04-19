@@ -162,7 +162,7 @@ class Worker extends Component {
             name: this.state.queryName,
         }
         this.postData('http://localhost:3000/worker/query', data).then(res => {
-            alert('修改信息成功');
+            alert('查询信息成功');
             this.setState({
                 allData: res
             })
@@ -258,7 +258,7 @@ class Worker extends Component {
                         filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
                         <Option value="学徒">学徒</Option>
                         <Option value="经理">经理</Option>
-                        <Option value="仓库保管员">仓库保管员</Option>
+                        <Option value="货物搬运工">货物搬运工</Option>
                         <Option value="业务">业务员</Option>
                         <Option value="仓维修员">维修员</Option>
                     </Select></span>
@@ -268,7 +268,7 @@ class Worker extends Component {
                     ? <div className="fix-worker">
                         <h3>修改工人信息列表</h3>
                         <hr />
-                        <table data-toggle="table" className="worker-table">
+                        <table border="1" data-toggle="table" className="worker-table">
                             <thead>
                                 <tr>
                                     <th>姓名</th>
@@ -305,7 +305,7 @@ class Worker extends Component {
                                             filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
                                             <Option value="学徒">学徒</Option>
                                             <Option value="经理">经理</Option>
-                                            <Option value="仓库保管员">仓库保管员</Option>
+                                            <Option value="货物搬运工">货物搬运工</Option>
                                             <Option value="业务">业务员</Option>
                                             <Option value="仓维修员">维修员</Option>
                                         </Select></td>
@@ -322,7 +322,7 @@ class Worker extends Component {
                 <div className="workers">
                     <h3>工人信息列表</h3>
                     <hr />
-                    <table data-toggle="table" className="worker-table">
+                    <table  data-toggle="table" className="worker-table">
                         <thead>
                             <tr>
                                 <th>姓名</th>

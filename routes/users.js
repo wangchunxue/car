@@ -10,7 +10,6 @@ router.post('/add', function (req, res) {
       console.log('[INSERT ERROR] - ', err.message);
       return;
     } else {
-      console.log('INSERT ID:', result);
       res.json(result);
     }
   });
@@ -22,20 +21,17 @@ router.post('/query', function (req, res) {
     if (error) {
       console.log(error);
     } else {
-      console.log(result);
       res.json(result);
     }
   });
 });
 
 router.post('/delete', function (req, res) {
-  console.log(req.body);
   const sql = `delete from t_user where userId ='${req.body.id}'`;
   connection.query(sql, function (error, result) {
     if (error) {
       console.log(error);
     } else {
-      console.log(result);
       res.json(result);
     }
   });
@@ -49,7 +45,6 @@ router.post('/update', function (req, res) {
       console.log("update" + err.message);
       return;
     } else {
-      console.log('update ID:', result);
       res.json(result);
     }
   });

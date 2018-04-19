@@ -40,3 +40,23 @@ h3{
   margin-top: 15px;
   float: right;
 }
+#business-chart{
+  width: 700px;
+  height:500px;
+}
+.business-table{
+  width: 100%;
+}
+.ant-input{
+  width: 130px;
+}
+.remain{
+  display: inline-block;
+  width: 210px;
+}
+.default-reper{
+  width: 180px;
+}
+.remain-input{
+  margin-right: 0px;
+}

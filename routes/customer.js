@@ -16,25 +16,21 @@ router.post('/add', function (req, res) {
     });
 });
 router.post('/query', function (req, res) {
-    console.log(req.body);
     const sql = `select * from t_customer where name='${req.body.name}'`;
     connection.query(sql, function (error, results) {
       if (error) {
         console.log(error);
       } else {
-        console.log(results);
         res.json(results);
       }
     });
 });
 router.post('/delete', function (req, res) {
-    console.log(req.body);
     const sql = `delete from t_customer where customerId ='${req.body.id}'`;
     connection.query(sql, function (error, results) {
       if (error) {
         console.log(error);
       } else {
-        console.log(results);
         res.json(results);
       }
     });
