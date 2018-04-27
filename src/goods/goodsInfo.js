@@ -103,7 +103,6 @@ class GoodsInfo extends Component {
         this.postData('http://localhost:3000/goods/add', data).then(res => {
             alert('增加信息成功');
         });
-
     }
     addNameChange(e) {
         this.setState({

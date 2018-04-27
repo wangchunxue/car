@@ -27,7 +27,7 @@ class Add extends Component {
             isTest: false,
             addSever: '',
             SeverData: null,
-            orderNum: Math.ceil(Math.random() * 1000),
+            orderNum: Math.ceil(Math.random() * 100000000000),
             businessData: null
         }
         this.addDateChange = this.addDateChange.bind(this);
@@ -67,8 +67,11 @@ class Add extends Component {
     }
     addBusinessClick() {
         let { queryData, currBusinessData, addSever, orderNum } = this.state;
-        var time = new Date();
-        time = +time;
+        var d = new Date();
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        var time = year +''+ month +''+ day;
         currBusinessData.map(item => {
             item.time = time;
             item.customerId = queryData[0].customerId;
@@ -80,17 +83,21 @@ class Add extends Component {
         currBusinessData.map(item => {
             this.postData('http://localhost:3000/business/add', item).then((res) => {
                 this.setState({
-                    orderNum: Math.ceil(Math.random() * 1000)
+                    orderNum: Math.ceil(Math.random() * 100000000000)
                 })
             });
         });
-        var total = currBusinessData.reduce((a, b) => {
-            return a.singeMoney + b.singeMoney;
-        });
+        var total = 0;
+        if (currBusinessData.length === 1) {
+            total = currBusinessData[0].singeMoney
+        } else if (currBusinessData.length > 1) {
+            total = currBusinessData.reduce((a, b) => {
+                return a.singeMoney + b.singeMoney;
+            });
+        }
         this.postData('http://localhost:3000/business/queryOrder', data).then((res) => {
             const params = {
                 total: total,
-                id: res[0].orderId,
                 businessNum: orderNum
             }
             this.postData('http://localhost:3000/business/addBusiness', params).then((res) => {
@@ -246,13 +253,14 @@ class Add extends Component {
         })
     }
     needNumBlur() {
-        let { queryGoodsData, needNum } = this.state;
+        let { queryGoodsData, needNum = 0 } = this.state;
         let price = 0;
         if (queryGoodsData.length < 1) {
             needNum = 0;
+            return ;
         } else {
             price = queryGoodsData[0].goodsMarkPrice;
-        }
+        } 
         let num = queryGoodsData[0].goodsNum - needNum;
         if (num < 0) {
             alert('货品数量剩余不足，请重新输入');
@@ -332,7 +340,7 @@ class Add extends Component {
                 {this.renderFixOption()}
                 <hr />
                 <div>
-                    <table data-toggle="table" className="worker-table">
+                    <table data-toggle="table" className="business-table">
                         <thead>
                             <tr>
                                 <th>货品名</th>

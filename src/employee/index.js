@@ -16,7 +16,7 @@ class SiderDemo extends Component {
             collapsed: false,
             worker: true,
             user: false
-        };
+       };
         this.onCollapse = this.onCollapse.bind(this);
         this.onClick = this.onClick.bind(this);
     }
@@ -48,11 +48,11 @@ class SiderDemo extends Component {
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onClick={this.onClick}>
                         <Menu.Item key="8">
                             <Icon type="user" />
-                            <span>worker</span>
+                            <span>员工信息</span>
                         </Menu.Item>
                         <Menu.Item key="7">
                             <Icon type="user" />
-                            <span>user</span>
+                            <span>管理员登陆信息</span>
                         </Menu.Item>
                     </Menu>
                 </Sider>

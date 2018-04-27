@@ -20,7 +20,6 @@ router.post('/add', function (req, res) {
             console.log('[INSERT ERROR] - ', err.message);
             return;
         } else {
-            console.log('INSERT ID:', result);
             res.json(result);
         }
     });
@@ -34,7 +33,6 @@ router.post('/update', function (req, res) {
             console.log("update" + err.message);
             return;
         } else {
-            console.log('update ID:', result);
             res.json(result);
         }
     });
@@ -48,7 +46,6 @@ router.post('/updateNum', function (req, res) {
             console.log("update" + err.message);
             return;
         } else {
-            console.log('update ID:', result);
             res.json(result);
         }
     });

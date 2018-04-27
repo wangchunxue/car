@@ -60,9 +60,9 @@ class SiderDemo extends Component {
         >
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onClick={this.onClick}>
-            <Menu.Item key="10"> <Icon type="user" /><span>add business</span></Menu.Item>
-            <Menu.Item key="11"> <Icon type="user" /><span>query business</span></Menu.Item>
-            <Menu.Item key="13"> <Icon type="user" /><span>total business</span></Menu.Item>
+            <Menu.Item key="10"> <Icon type="user" /><span>增加业务流水</span></Menu.Item>
+            <Menu.Item key="11"> <Icon type="user" /><span>查询业务流水</span></Menu.Item>
+            <Menu.Item key="13"> <Icon type="user" /><span>流水统计</span></Menu.Item>
           </Menu>
         </Sider>
         <Layout>

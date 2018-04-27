@@ -109,9 +109,7 @@ class NormalLoginForm extends Component {
             {getFieldDecorator('remember', {
               valuePropName: 'checked',
               initialValue: true,
-            })(
-              <Checkbox>Remember me</Checkbox>
-            )}
+            })}
             <Button type="primary"  className="login-form-button" onClick={this.logIn}>
             log in
             </Button>  

@@ -7,8 +7,7 @@ module.exports = {
     business: './src/business/business',
     customer: './src/customer/index',
     employee: './src/employee/index',
-    goods: './src/goods/index.js',
-    infoFix: './src/infoFixed/index.js',
+    goods: './src/goods/index.js'
   },
   output: {
     filename: '[name].js',
@@ -76,13 +75,7 @@ module.exports = {
       filename: 'index.html',
       chunks:['index'],
       template: path.resolve(__dirname, 'views/index.ejs')
-    }),
-    new HtmlWebpackPlugin({
-      title: '汽车维修服务管理公司',
-      filename: 'infoFix.html',
-      chunks:['infoFix'],
-      template: path.resolve(__dirname, 'views/infoFix.ejs')
-    }),
+    })
   ]
 
 };
