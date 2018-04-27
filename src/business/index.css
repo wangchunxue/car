@@ -40,9 +40,13 @@ h3{
   margin-top: 15px;
   float: right;
 }
-#business-chart{
-  width: 700px;
-  height:500px;
+#business-one{
+  width: 1000px;
+  height: 500px;
+}
+#business-two{
+  width: 1000px;
+  height: 500px;
 }
 .business-table{
   width: 100%;

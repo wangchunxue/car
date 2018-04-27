@@ -13,6 +13,17 @@ router.post('/query', function (req, res) {
         }
     });
 });
+router.get('/queryGoods', function (req, res) {
+    console.log(req.body);
+    const sql = `select * from t_goods, t_repertory where t_repertory.repertoryId = t_goods.repertoryId`;
+    connection.query(sql, function (error, result) {
+        if (error) {
+            console.log(error);
+        } else {
+            res.json(result);
+        }
+    });
+});
 router.post('/add', function (req, res) {
     var addSql = `INSERT INTO t_goods(goodsId,goodsName,goodsPrice,goodsMarkPrice,goodsNum,repertoryId) VALUES(0,'${req.body.name}','${req.body.price}','${req.body.sale}','${req.body.num}','${req.body.repert}')`;
     connection.query(addSql, function (err, result) {
