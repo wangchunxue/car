@@ -28,7 +28,9 @@ class Add extends Component {
             addSever: '',
             SeverData: null,
             orderNum: Math.ceil(Math.random() * 100000000000),
-            businessData: null
+            businessData: null,
+            isShowTotal: false,
+            total: 0
         }
         this.addDateChange = this.addDateChange.bind(this);
         this.queryCustomerChange = this.queryCustomerChange.bind(this);
@@ -37,7 +39,6 @@ class Add extends Component {
         this.queryGoodsInfo = this.queryGoodsInfo.bind(this);
         this.queryGoodsNameChange = this.queryGoodsNameChange.bind(this);
         this.needNumCnange = this.needNumCnange.bind(this);
-        this.needNumBlur = this.needNumBlur.bind(this);
         this.ChooseGoodsClick = this.ChooseGoodsClick.bind(this);
         this.addSeverChange = this.addSeverChange.bind(this);
         this.addBusinessClick = this.addBusinessClick.bind(this);
@@ -66,7 +67,7 @@ class Add extends Component {
         }
     }
     addBusinessClick() {
-        let { queryData, currBusinessData, addSever, orderNum } = this.state;
+        let { queryData, currBusinessData, addSever, orderNum, total} = this.state;
         var d = new Date();
         var day = d.getDate();
         var month = d.getMonth() + 1;
@@ -87,12 +88,17 @@ class Add extends Component {
                 })
             });
         });
-        var total = 0;
+        let grade = queryData[0].grade;
+        let count = 1;
+        if(grade == 2){
+            count = 0.9;
+        } 
         if (currBusinessData.length === 1) {
-            total = currBusinessData[0].singeMoney
+            total = Math.floor(currBusinessData[0].singeMoney *count);
         } else if (currBusinessData.length > 1) {
             total = currBusinessData.reduce((a, b) => {
-                return a.singeMoney + b.singeMoney;
+                let totalMoney =  Math.floor((a.singeMoney + b.singeMoney)*count);
+                return totalMoney ;
             });
         }
         this.postData('http://localhost:3000/business/queryOrder', data).then((res) => {
@@ -103,6 +109,10 @@ class Add extends Component {
             this.postData('http://localhost:3000/business/addBusiness', params).then((res) => {
                 console.log(res);
             });
+        });
+        this.setState({
+            total: total,
+            isShowTotal: true
         });
     }
     addSeverChange(value) {
@@ -138,7 +148,6 @@ class Add extends Component {
                 this.setState({
                     queryGoodsData: res
                 });
-                console.log(res)
             }
         });
     }
@@ -248,12 +257,23 @@ class Add extends Component {
         )
     }
     needNumCnange(e) {
-        this.setState({
-            needNum: e.target.value
-        })
+        var val = e.target.value;
+        if (isNaN(val)) {
+            setTimeout(function () {
+               alert('请输入有效的数字');
+               this.setState({ needNum: null});
+            }.bind(this), 500);
+        } else {
+            if( e.target.value.length > 11){
+                alert('您输入的号码超过11位数字');
+                this.setState({ needNum: null});
+            } else {
+                this.setState({ needNum: e.target.value });
+            }
+        }
     }
-    needNumBlur() {
-        let { queryGoodsData, needNum = 0 } = this.state;
+    ChooseGoodsClick() {
+        let { queryGoodsName, queryGoodsData, needNum, singeMoney, currBusinessData, addSever, orderNum } = this.state;
         let price = 0;
         if (queryGoodsData.length < 1) {
             needNum = 0;
@@ -273,16 +293,13 @@ class Add extends Component {
             singeMoney: price * needNum
         });
 
-        const data = {
+        const updateData = {
             num: num,
             id: queryGoodsData[0].goodsId
         }
-        this.postData('goods/updateNum', data).then((res) => {
-            this.queryGoodsInfo();
-        })
-    }
-    ChooseGoodsClick() {
-        let { queryGoodsName, queryGoodsData, needNum, singeMoney, currBusinessData, addSever, orderNum } = this.state;
+        this.postData('goods/updateNum',updateData).then((res) => {
+            //this.queryGoodsInfo();
+        });
         let reper = queryGoodsData[0].repertoryName;
         let Price = queryGoodsData[0].goodsMarkPrice || 0;
         needNum = needNum || 0;
@@ -301,11 +318,11 @@ class Add extends Component {
             currBusinessData: currBusinessData,
             queryGoodsData: [],
             isShow: true,
-            queryGoodsName: '',
+            queryGoodsName: null,
             needNum: '',
             singeMoney: ''
         });
-
+        
     }
     renderBusinessItem() {
         const { currBusinessData } = this.state;
@@ -323,7 +340,7 @@ class Add extends Component {
         return qqq;
     }
     render() {
-        let queryGoodsData = this.state.queryGoodsData;
+        let { queryGoodsData, total } = this.state;
         let defaultPrice = '';
         let defaultNum = 0;
         let defaultReper = ''
@@ -355,7 +372,7 @@ class Add extends Component {
                                 <td><Input value={this.state.queryGoodsName} onChange={this.queryGoodsNameChange} onBlur={this.queryGoodsInfo}></Input></td>
                                 <td className="default-reper">{defaultReper}</td>
                                 <td className="default-reper">{defaultPrice}</td>
-                                <td><span className="remain"><Input className="remain-input" value={this.state.needNum} onChange={this.needNumCnange} onBlur={this.needNumBlur}></Input>剩余{defaultNum}件</span></td>
+                                <td><span className="remain"><Input className="remain-input" value={this.state.needNum} onChange={this.needNumCnange} ></Input>剩余{defaultNum}件</span></td>
                                 <td className="default-reper">{this.state.singeMoney}</td>
                                 <td><Button type="primary" onClick={this.ChooseGoodsClick}>确定</Button></td>
                             </tr>
@@ -398,6 +415,9 @@ class Add extends Component {
                         </table>
                         <Button type="primary" onClick={this.addBusinessClick}>生成订单</Button>
                         <hr />
+                        { this.state.isShowTotal 
+                        ? <div className="business-total">总计：{total}元</div>
+                        :false}
                     </div>
                     : false}
 

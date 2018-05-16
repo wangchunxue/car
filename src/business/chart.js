@@ -51,7 +51,7 @@ class Chart extends Component {
                 goodsNum: goodsNum
             });
             this.demoOne();
-            this.demoTwo();
+            //this.demoTwo();
         }
     }
     demoOne() {

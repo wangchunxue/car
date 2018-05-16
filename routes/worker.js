@@ -16,7 +16,7 @@ router.post('/add', function (req, res) {
 });
 router.post('/query', function (req, res) {
     console.log(req.body);
-    const sql = `select * from t_worker where workerName='${req.body.name}'`;
+    const sql = `select * from t_worker where workerName like '%${req.body.name}%'`;
     connection.query(sql, function (error, results) {
       if (error) {
         console.log(error);

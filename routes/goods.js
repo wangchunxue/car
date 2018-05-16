@@ -4,7 +4,7 @@ var router = express.Router();
 var connection = require('../models/db'); // 使用连接池连接数据库
 router.post('/query', function (req, res) {
     console.log(req.body);
-    const sql = `select * from t_goods, t_repertory where goodsName = '${req.body.name}' and t_repertory.repertoryId = t_goods.repertoryId`;
+    const sql = `select * from t_goods, t_repertory where goodsName like '%${req.body.name}%' and t_repertory.repertoryId = t_goods.repertoryId`;
     connection.query(sql, function (error, result) {
         if (error) {
             console.log(error);

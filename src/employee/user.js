@@ -14,8 +14,8 @@ class User extends Component {
             addName: '',
             queryName: '',
             queryResult: [],
-            fixName:'',
-            fixPsw:''
+            fixName: '',
+            fixPsw: ''
         }
         this.addClick = this.addClick.bind(this);
         this.addNameChange = this.addNameChange.bind(this);
@@ -59,7 +59,7 @@ class User extends Component {
             name: addName,
             password: addPsw
         };
-        if(!addName && !addPsw){
+        if (!addName && !addPsw) {
             alert("请填写信息后在提交");
             return;
         }
@@ -67,17 +67,17 @@ class User extends Component {
             alert("添加信息成功");
         });
     }
-    queryNameChange(e){
+    queryNameChange(e) {
         this.setState({
             queryName: e.target.value
         });
     }
-    queryClick(){
+    queryClick() {
         const { queryName } = this.state;
         const data = {
             name: queryName
         };
-        if(!queryName){
+        if (!queryName) {
             alert("请填写信息后在提交");
             return;
         }
@@ -88,8 +88,8 @@ class User extends Component {
             });
         });
     }
-    fixClick(){
-        const{ fixName,fixPsw,queryResult} = this.state;
+    fixClick() {
+        const { fixName, fixPsw, queryResult } = this.state;
         const data = {
             name: fixName || queryResult[0].name,
             password: fixPsw || queryResult[0].password,
@@ -100,18 +100,18 @@ class User extends Component {
             alert("信息成功");
         });
     }
-    fixNameChange(e){
+    fixNameChange(e) {
         this.setState({
-            fixName:e.target.value || this.state.queryResult[0].name
+            fixName: e.target.value || this.state.queryResult[0].name
         });
     }
-    fixPswChange(e){
+    fixPswChange(e) {
         this.setState({
-            fixPsw:e.target.value || this.state.queryResult[0].password
+            fixPsw: e.target.value || this.state.queryResult[0].password
         });
     }
-    deleteClick(){
-        const{ queryResult} = this.state;
+    deleteClick() {
+        const { queryResult } = this.state;
         const data = {
             id: queryResult[0].userId
         }
@@ -119,6 +119,20 @@ class User extends Component {
             alert('信息删除成功');
             this.queryClick();
         });
+    }
+    renderItem() {
+        var queryData = this.state.queryResult;
+        var qqq = queryData.map((item, index) => {
+            return (
+                <div key={index}>
+                    <span>账号<Input defaultValue={item.name} onChange={this.fixNameChange}></Input></span>
+                    <span>密码<Input defaultValue={item.password} onChange={this.fixPswChange}></Input></span>
+                    <Button type="primary" onClick={this.fixClick}>修改</Button>
+                    <Button type="primary" onClick={this.deleteClick}>删除</Button>
+                </div>
+            );
+        });
+        return qqq;
     }
     render() {
         return (
@@ -134,14 +148,9 @@ class User extends Component {
                     <h3>查询管理员信息</h3>
                     <span>账号:<Input onChange={this.queryNameChange}></Input></span>
                     <Button type="primary" onClick={this.queryClick}>查询</Button>
-                   {this.state.queryResult.length > 0 
-                   ? <div>
-                   <span>账号<Input defaultValue={this.state.queryResult[0].name} onChange={this.fixNameChange}></Input></span>
-                   <span>密码<Input defaultValue={this.state.queryResult[0].password } onChange={this.fixPswChange}></Input></span>  
-                   <Button type="primary" onClick={this.fixClick}>修改</Button>
-                   <Button type="primary" onClick={this.deleteClick}>删除</Button>                   
-                   </div>      
-                   : false}             
+                    {this.state.queryResult.length > 0
+                        ? this.renderItem()
+                   : false}
                     <hr />
                 </div>
             </div>

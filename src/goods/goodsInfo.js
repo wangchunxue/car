@@ -14,8 +14,8 @@ class GoodsInfo extends Component {
         this.state = {
             reperData: [],
             addName: '',
-            addPrice: '',
-            addSale: '',
+            addPrice: null,
+            addSale: null,
             addNum: '',
             addrepert: '',
             fixName: '',
@@ -42,12 +42,12 @@ class GoodsInfo extends Component {
         this.exitClick = this.exitClick.bind(this);
         this.queryNameChange = this.queryNameChange.bind(this);
         this.queryClick = this.queryClick.bind(this);
-        this.deleteClick = this.deleteClick.bind(this);  
+        this.deleteClick = this.deleteClick.bind(this);
     }
     componentDidMount() {
         this.getData();
     }
-    deleteClick(){
+    deleteClick() {
         const data = {
             id: this.state.queryData[0].goodsId
         }
@@ -110,14 +110,31 @@ class GoodsInfo extends Component {
         })
     }
     addPriceChange(e) {
-        this.setState({
-            addPrice: e.target.value
-        })
+        var val = e.target.value;
+        if (isNaN(val)) {
+            setTimeout(function () {
+                alert('请输入有效的数字');
+                this.setState({ addPrice: null });
+            }.bind(this), 1000);
+        } else {
+            this.setState({
+                addPrice: e.target.value
+            });
+        }
+
     }
     addSaleChange(e) {
-        this.setState({
-            addSale: e.target.value
-        })
+        var val = e.target.value;
+        if (isNaN(val)) {
+            setTimeout(function () {
+                alert('请输入有效的数字');
+                this.setState({ addSale: null });
+            }.bind(this), 1000);
+        } else {
+            this.setState({
+                addSale: e.target.value
+            });
+        }
     }
     addNumChange(e) {
         this.setState({
@@ -150,14 +167,28 @@ class GoodsInfo extends Component {
         })
     }
     fixPriceChange(e) {
-        this.setState({
-            fixPrice: e.target.value
-        })
+        var val = e.target.value;
+        if (isNaN(val)) {
+            setTimeout(function () {
+                alert('请输入有效的数字');
+            }.bind(this), 1000);
+        } else {
+            this.setState({
+                fixPrice: e.target.value
+            });
+        }
     }
     fixSaleChange(e) {
-        this.setState({
-            fixSale: e.target.value
-        })
+        var val = e.target.value;
+        if (isNaN(val)) {
+            setTimeout(function () {
+                alert('请输入有效的数字');
+            }.bind(this), 1000);
+        } else {
+            this.setState({
+                fixSale: e.target.value
+            });
+        }
     }
     fixNumChange(e) {
         this.setState({
@@ -244,14 +275,32 @@ class GoodsInfo extends Component {
             console.log("Fetch failed!", e);
         });
     }
+    renderItem() {
+        var queryData = this.state.queryData;
+        var qqq = queryData.map((item, index) => {
+            return (
+                <div key={index}>
+                    <span>货物名称: <Input onChange={this.fixNameChange} defaultValue={item.goodsName}></Input></span>
+                    <span>货物进场价格: <Input onChange={this.fixPriceChange} defaultValue={item.goodsPrice}></Input></span>
+                    <span>货物市场价格: <Input onChange={this.fixSaleChange} defaultValue={item.goodsMarkPrice}></Input></span>
+                    <span>货物数量: <Input onChange={this.fixNumChange} defaultValue={item.goodsNum}></Input></span>
+                    <span>仓库: {this.renderFixOption()} </span>
+                    <Button type="primary" onClick={this.fixClick}>修改提交</Button>
+                    <Button type="primary" onClick={this.exitClick}>退出修改</Button>
+                    <Button type="primary" onClick={this.deleteClick}>删除</Button>
+                </div>
+            );
+        });
+        return qqq;
+    }
     render() {
         return (
             <div className="goodsInfo">
                 <div className="add-goods">
                     <h3>新增货物</h3>
                     <span>货物名称: <Input onChange={this.addNameChange}></Input></span>
-                    <span>货物进场价格: <Input onChange={this.addPriceChange}></Input></span>
-                    <span>货物市场价格: <Input onChange={this.addSaleChange}></Input></span>
+                    <span>货物进场价格: <Input value={this.state.addPrice} onChange={this.addPriceChange}></Input></span>
+                    <span>货物市场价格: <Input value={this.state.addSale} onChange={this.addSaleChange}></Input></span>
                     <span>货物数量: <Input onChange={this.addNumChange}></Input></span>
                     <span>仓库: {this.renderOption()} </span>
                     <Button type="primary" onClick={this.addClick}>增加</Button>
@@ -265,14 +314,7 @@ class GoodsInfo extends Component {
                 </div>
                 {this.state.isfix ? <div className="fix-name">
                     <h3>修改货物信息</h3>
-                    <span>货物名称: <Input onChange={this.fixNameChange} defaultValue={this.state.queryData[0].goodsName}></Input></span>
-                    <span>货物进场价格: <Input onChange={this.fixPriceChange} defaultValue={this.state.queryData[0].goodsPrice}></Input></span>
-                    <span>货物市场价格: <Input onChange={this.fixSaleChange} defaultValue={this.state.queryData[0].goodsMarkPrice}></Input></span>
-                    <span>货物数量: <Input onChange={this.fixNumChange} defaultValue={this.state.queryData[0].goodsNum}></Input></span>
-                    <span>仓库: {this.renderFixOption()} </span>
-                    <Button type="primary" onClick={this.fixClick}>修改提交</Button>
-                    <Button type="primary" onClick={this.exitClick}>退出修改</Button>
-                    <Button type="primary" onClick={this.deleteClick}>删除</Button>                    
+                    {this.renderItem()}
                     <hr />
                 </div>
                     : false}

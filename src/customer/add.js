@@ -13,7 +13,7 @@ class Add extends Component {
         super(props);
         this.state = {
             customerName: '',
-            customerTell: '',
+            customerTell: null,
             carNo: '',
             customerLevel: ''
         };
@@ -27,7 +27,21 @@ class Add extends Component {
         this.setState({ customerName: e.target.value });
     }
     tellChange(e) {
-        this.setState({ customerTell: e.target.value });
+        var val = e.target.value;
+        if (isNaN(val)) {
+            setTimeout(function () {
+               alert('请输入有效的数字');
+               this.setState({ customerTell: null});
+            }.bind(this), 1000);
+        } else {
+            if( e.target.value.length > 11){
+                alert('您输入的号码超过11位数字');
+                this.setState({ customerTell: null});
+            } else {
+                this.setState({ customerTell: e.target.value });
+            }
+            
+        }
     }
     carChange(e) {
         this.setState({ carNo: e.target.value });
@@ -64,7 +78,7 @@ class Add extends Component {
             return;
         } else {
             this.postData('http://localhost:3000/customer/add', data).then(res => {
-                if(res){
+                if (res) {
                     alert('增加顾客信息成功');
                 }
             });
@@ -88,7 +102,7 @@ class Add extends Component {
                         <tbody>
                             <tr>
                                 <td><Input onChange={this.customeChange}></Input></td>
-                                <td><Input onChange={this.tellChange}></Input></td>
+                                <td><Input value={this.state.customerTell}  onChange={this.tellChange}></Input></td>
                                 <td><Input onChange={this.carChange}></Input></td>
                                 <td> <Select
                                     showSearch

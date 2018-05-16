@@ -50,9 +50,19 @@ class Show extends Component {
         })
     }
     iphoneChange(e) {
-        this.setState({
-            fixIphone: e.target.value
-        });
+        var val = e.target.value;
+        if (isNaN(val)) {
+            setTimeout(function () {
+               alert('请输入有效的数字');
+            }.bind(this), 1000);
+        } else {
+            if( e.target.value.length > 11){
+                alert('您输入的号码超过11位数字');
+            } else {
+                this.setState({ fixIphone: e.target.value });
+            }
+            
+        }
     }
     exitFixInfo() {
         this.setState({
@@ -136,12 +146,16 @@ class Show extends Component {
             )
         }
         var qqq = queryData.map((item, index) => {
+            var grade = '普通用户';
+            if(item.grade !== 1){
+                grade = 'vip用户'
+            }
             return (
                 <tr key={index}>
                     <td>{item.name}</td>
                     <td>{item.iphone}</td>
                     <td>{item.carNum}</td>
-                    <td>{item.grade}</td>
+                    <td>{grade}</td>
                     <td>
                         <Button type="primary" onClick={() => { this.curdelClick(index) }}>删除</Button>
                         <Button type="primary" onClick={() => { this.curFixClick(index) }}>修改</Button>

@@ -63,9 +63,20 @@ class Worker extends Component {
         })
     }
     addIphoneChange(e) {
-        this.setState({
-            addIphone: e.target.value
-        })
+        var val = e.target.value;
+        if (isNaN(val)) {
+            setTimeout(function () {
+                alert('请输入有效的数字');
+                this.setState({ addIphone: null });
+            }.bind(this), 1000);
+        } else {
+            if (e.target.value.length > 11) {
+                alert('您输入的号码超过11位数字');
+                this.setState({ addIphone: null });
+            } else {
+                this.setState({ addIphone: e.target.value });
+            }
+        }
     }
     addNameChange(e) {
         this.setState({
@@ -115,9 +126,18 @@ class Worker extends Component {
         })
     }
     iphoneChange(e) {
-        this.setState({
-            fixIphone: e.target.value
-        })
+        var val = e.target.value;
+        if (isNaN(val)) {
+            setTimeout(function () {
+                alert('请输入有效的数字');
+            }.bind(this), 1000);
+        } else {
+            if (e.target.value.length > 11) {
+                alert('您输入的号码超过11位数字,请重新输入');
+            } else {
+                this.setState({ fixIphone: e.target.value });
+            }
+        }
     }
     sexChange(value) {
         this.setState({
@@ -237,7 +257,7 @@ class Worker extends Component {
                     <h3>新增工人信息</h3>
                     <hr />
                     <span>姓名: <Input onChange={this.addNameChange}></Input></span>
-                    <span>电话: <Input onChange={this.addIphoneChange}></Input></span>
+                    <span>电话: <Input value={this.state.addIphone} onChange={this.addIphoneChange}></Input></span>
                     <span>性别:  <Select
                         showSearch
                         style={{ width: 200 }}
@@ -322,7 +342,7 @@ class Worker extends Component {
                 <div className="workers">
                     <h3>工人信息列表</h3>
                     <hr />
-                    <table  data-toggle="table" className="worker-table">
+                    <table data-toggle="table" className="worker-table">
                         <thead>
                             <tr>
                                 <th>姓名</th>
